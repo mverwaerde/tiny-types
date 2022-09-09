@@ -1,13 +1,12 @@
 package org.example;
 
+import org.example.valueObject.Channel;
+
 /**
  * InventoryManager - a facade to the database facade for inventory
  */
 public class InventoryRepo {
-    public InventoryItem LookUpItem(String channel, String market, String styleCode, String description) throws Exception {
-        if (channel == null || channel.length() < 5) {
-            throw new Exception("Invalid channel");
-        }
+    public InventoryItem LookUpItem(Channel channel, String market, String styleCode, String description) throws Exception {
         if (market == null || market.length() < 4 || market.length() > 8) {
             throw new Exception("Invalid market");
         }
@@ -27,7 +26,7 @@ public class InventoryRepo {
         if (!dbmgr.FindStyle(styleCode)) {
             throw new Exception("Invalid style code");
         }
-        InventoryItem item = (InventoryItem)dbmgr.FindItem(styleCode, market, description, channel);
+        InventoryItem item = dbmgr.FindItem(styleCode, market, description, channel);
         if (item == null) {
             return null;
         }

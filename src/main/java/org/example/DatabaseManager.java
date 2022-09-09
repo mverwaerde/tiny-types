@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.valueObject.Channel;
+
 /**
  * DatabaseManager - adapter to talk to Inventory database
  */
@@ -11,12 +13,12 @@ public class DatabaseManager {
         }
         _dbname = dbname;
     }
-    public boolean FindChannel(String channel) throws Exception {
-        if (channel == null || channel.length() < 7) {
+    public boolean FindChannel(Channel channel) throws Exception {
+        if (channel == null || channel.name().length() < 7) {
             throw new Exception("Invalid channel");
         }
         //pretend we talk to the database here, and we only have one channel, channel-5
-        if (!channel.toLowerCase().equals("channel-5")) {
+        if (!channel.name().toLowerCase().equals("channel-5")) {
             throw new Exception("Failed to find channel " + channel);
         }
         return true;
