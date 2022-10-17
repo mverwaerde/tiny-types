@@ -23,49 +23,57 @@ class InventoryRepoTest {
 
     @Test
     public void TestNullChannel() {
-        assertThatThrownBy(() -> inventoryRepo.LookUpItem(null, validMarket, validStyle, validDescription))
+        assertThatThrownBy(() ->
+                inventoryRepo.LookUpItem(null, validMarket, validStyle, validDescription))
+                .isInstanceOf(Exception.class);
+    }
+    @Test
+    public void TestInvalidChannel() {
+        assertThatThrownBy(() ->
+                inventoryRepo.LookUpItem("ch", validMarket, validStyle, validDescription))
                 .isInstanceOf(Exception.class);
     }
 
     @Test
     public void TestNullMarket() {
-        assertThatThrownBy(() -> inventoryRepo.LookUpItem(validChannel, null, validStyle, validDescription))
+        assertThatThrownBy(() ->
+                inventoryRepo.LookUpItem(validChannel, null, validStyle, validDescription))
                 .isInstanceOf(Exception.class);
     }
 
     @Test
     public void TestNullStyle() {
-        assertThatThrownBy(() -> inventoryRepo.LookUpItem(validChannel, validMarket, null, validDescription))
+        assertThatThrownBy(() ->
+                inventoryRepo.LookUpItem(validChannel, validMarket, null, validDescription))
                 .isInstanceOf(Exception.class);
     }
 
     @Test
     public void TestNullDescription() {
-        assertThatThrownBy(() -> inventoryRepo.LookUpItem(validChannel, validMarket, validStyle, null))
+        assertThatThrownBy(() ->
+                inventoryRepo.LookUpItem(validChannel, validMarket, validStyle, null))
                 .isInstanceOf(Exception.class);
     }
 
-    @Test
-    public void TestInvalidChannel() {
-        assertThatThrownBy(() -> inventoryRepo.LookUpItem("ch", validMarket, validStyle, validDescription))
-                .isInstanceOf(Exception.class);
-    }
 
     @Test
     public void TestInvalidMarket() {
-        assertThatThrownBy(() -> inventoryRepo.LookUpItem(validChannel, "mkt", validStyle, validDescription))
+        assertThatThrownBy(() ->
+                inventoryRepo.LookUpItem(validChannel, "mkt", validStyle, validDescription))
                 .isInstanceOf(Exception.class);
     }
 
     @Test
     public void TestInvalidStyle() {
-        assertThatThrownBy(() -> inventoryRepo.LookUpItem(validChannel, validMarket, "styl", validDescription))
+        assertThatThrownBy(() ->
+                inventoryRepo.LookUpItem(validChannel, validMarket, "styl", validDescription))
                 .isInstanceOf(Exception.class);
     }
 
     @Test
     public void TestInvalidDescription() {
-        assertThatThrownBy(() -> inventoryRepo.LookUpItem(validChannel, validMarket, validStyle, ""))
+        assertThatThrownBy(() ->
+                inventoryRepo.LookUpItem(validChannel, validMarket, validStyle, ""))
                 .isInstanceOf(Exception.class);
     }
 

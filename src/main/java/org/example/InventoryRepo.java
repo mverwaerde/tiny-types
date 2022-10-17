@@ -4,10 +4,8 @@ package org.example;
  * InventoryManager - a facade to the database facade for inventory
  */
 public class InventoryRepo {
-    public InventoryItem LookUpItem(String channel, String market, String styleCode, String description) throws Exception {
-        if (channel == null || channel.length() < 5) {
-            throw new Exception("Invalid channel");
-        }
+    public InventoryItem LookUpItem(String channelName, String market, String styleCode, String description) throws Exception {
+        Channel channel = new Channel(channelName);
         if (market == null || market.length() < 4 || market.length() > 8) {
             throw new Exception("Invalid market");
         }
@@ -18,8 +16,8 @@ public class InventoryRepo {
             throw new Exception("Invalid description");
         }
         DatabaseManager dbmgr = new DatabaseManager("Inventory");
-        if (!dbmgr.FindChannel(channel)) {
-            throw new Exception("Invalid channel");
+        if (!dbmgr.FindChannel(channel.getName())) {
+            throw new Exception("Invalid channelName");
         }
         if (!dbmgr.FindMarket(market)) {
             throw new Exception("Invalid market");
@@ -27,7 +25,7 @@ public class InventoryRepo {
         if (!dbmgr.FindStyle(styleCode)) {
             throw new Exception("Invalid style code");
         }
-        InventoryItem item = (InventoryItem)dbmgr.FindItem(styleCode, market, description, channel);
+        InventoryItem item = (InventoryItem) dbmgr.FindItem(styleCode, market, description, channelName);
         if (item == null) {
             return null;
         }
@@ -39,7 +37,7 @@ public class InventoryRepo {
             throw new Exception("Invalid sku");
         }
         DatabaseManager dbmgr = new DatabaseManager("Inventory");
-        InventoryItem item = (InventoryItem)dbmgr.FindItem(sku);
+        InventoryItem item = (InventoryItem) dbmgr.FindItem(sku);
         if (item == null) {
             return null;
         }
