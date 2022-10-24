@@ -1,7 +1,17 @@
 package org.example;
 
+import org.example.model.Channel;
+
 /**
  * DatabaseManager - adapter to talk to Inventory database
+ * DONE:
+ * Création Exception InvalidChannelException
+ * TODO :
+ * Utiliser l'objet Channel dans la classe de Test
+ * Suppression de la méthode de test TestInvalidChannel
+ * Modifier la méthode LookUpItem afin de passer l'objet Channel en paramètre
+ * Création d'un test afin de valider unitairement le comportement de l'objet Channel
+ *
  */
 public class DatabaseManager {
     private String _dbname;

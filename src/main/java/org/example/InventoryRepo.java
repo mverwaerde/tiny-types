@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.model.Channel;
+
 /**
  * InventoryManager - a facade to the database facade for inventory
  */
